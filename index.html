@@ -46,10 +46,35 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Practica 01</p>
+                <p class="masthead-subheading font-weight-light mb-0">Practica 02</p>
             </div>
         </header>
+        <?php
+            try{
+                $pdo = new PDO("mysql:host=db;dbname=mysql","root","root");
+                $stmt = $pdo->prepare("SELECT nombre from team_members");
+                $stmt->execute();
+                $team_members= $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            }
+            catch(PDOException $e){
+                die("Could not connect to the database mysql :" . $e->getMessage());
+            }
+        ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Team Members</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($team_members as $member): ?>
+                    <tr>
+                        <td><?=$member['nombre'] ?></td>
+                    </tr>
+                <?php endforeach?>
+            </tbody>
+        </table>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
