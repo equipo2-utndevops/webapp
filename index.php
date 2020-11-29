@@ -51,7 +51,7 @@
         </header>
         <?php
             try{
-                $pdo = new PDO("mysql:host=db;dbname=mysql","root","root");
+                $pdo = new PDO("mysql:host=db;dbname=db_devops","root","root");
                 $stmt = $pdo->prepare("SELECT nombre from team_members");
                 $stmt->execute();
                 $team_members= $stmt->fetchAll(PDO::FETCH_ASSOC);
